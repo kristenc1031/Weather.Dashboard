@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <h1>Weather Dashboard</h1>
+
+<div class="container">
+  <nav>
+    <div class="nav-wrapper">
+      <form>
+        <div class="input-field">
+          <input id="search" type="search" required>
+          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+    </div>
+  </nav>
+  <div class="city">City</div>
+  <div class="wind">Wind</div>
+  <div class="humidity">Humidity</div>
+  <div class="temperature">Temperature</div>
+
+    <h2>5-Day Forecast</h2>
+   <div>
+  <div class="row">
+    <div class="col s8 m3">
+      <div class="card-panel teal">
+        <span class="white-text">
+          <ul>
+            <li>Date:</li>
+            <li>Temp:</li>
+            <li>Humidity:</li>
+          </ul>
+        </span>
+      </div>
+    </div>
+    <div class="col s8 m3">
+      <div class="card-panel teal">
+        <span class="white-text">
+          <ul>
+            <li>Date:</li>
+            <li>Temp:</li>
+            <li>Humidity:</li>
+          </ul>
+        </span>
+      </div>
+    </div>
+    <div class="col s8 m3">
+      <div class="card-panel teal">
+        <span class="white-text">          
+          <ul>
+            <li>Date:</li>
+            <li>Temp:</li>
+            <li>Humidity:</li>
+          </ul>
+        </span>
+      </div>
+    </div>
+    <div class="col s8 m3">
+      <div class="card-panel teal">
+        <span class="white-text">          
+          <ul>
+            <li>Date:</li>
+            <li>Temp:</li>
+            <li>Humidity:</li>
+          </ul>
+        </span>
+      </div>
+    </div>
+    <div class="col s8 m3">
+      <div class="card-panel teal">
+        <span class="white-text">          
+          <ul>
+            <li>Date:</li>
+            <li>Temp:</li>
+            <li>Humidity:</li>
+          </ul>
+        </span>
+      </div>
+    </div>
+
+  </div>
+</div> 
+</div>
+  
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+
+    // Things to accomplish:
+    // Get an API Key from OpenWeatherMap API
+    //9b42df0a2335769838a31701728b5fe6 - api key 
+
+    // Create an AJAX call to retrieve data Log the data in console
+    //http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=9b42df0a2335769838a31701728b5fe6
+
+    $(document).ready(function(){
+
+    $("#search-city").on("click" , function(event){
+      event.preventDefault();
+      var city = $("search").val();
+    })
+
+    var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=lincoln&appid=9b42df0a2335769838a31701728b5fe6"
+
+    $.ajax({
+    url: apiUrl,
+    method: 'GET'
+    }).then(function(response){
+    console.log(response);
+    $(".city").text(response.name);
+    $(".wind").text(response.wind.speed);
+    $(".humidity").text(response.main.humidity);
+    $(".temp").text(response.main.temp);
+
+    function createItem() {
+        localStorage.setItem("mytime", Date.now());
+    }
+    function submit() {
+        var x = localStorage.getItem("mytime");
+        document.getElementById("demo").innerHTML = x;
+    }
+ })
+
+});
+
+
+  </script>
+    
+</body>
+</html>
